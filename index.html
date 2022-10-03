@@ -12,6 +12,7 @@
 			console.log(data)
 			const timeParser = d3.timeParse('%m/%d/%Y'); //m/d/yyyy
 			data.forEach(d => { d['release_date'] = timeParser(d['release_date']); });
+			data.forEach(d => { d['worldwide_box_office'] = Number(parseFloat(d['worldwide_box_office'].replace(/,/g, ''))); });
 		})
 </script>
 
