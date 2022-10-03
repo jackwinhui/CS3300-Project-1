@@ -4,7 +4,7 @@
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<style>
 		.gridlines line {
-			stroke: #bbb;
+			stroke: #fff;
 		}
 
 		.gridlines .domain {
@@ -16,8 +16,8 @@
 		}
 
 		svg {
-			background-image: url("./marvel_logo.jpg");
 			background-size: 1200px 800px;
+			background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url('./marvel_logo.jpg');
 		}
 	</style>
 </head>
@@ -51,6 +51,7 @@
 			annotations.append("g")
 				.attr("class", "x axis")
 				.attr("transform", `translate(${margin.left},${chartHeight + margin.top + 10})`)
+				.style("color","white")
 				.call(bottomAxis);
 
 			//y-axis with boxOffice - productionBudget
@@ -60,6 +61,7 @@
 			annotations.append("g")
 				.attr("class", "y axis")
 				.attr("transform", `translate(${margin.left - 10},${margin.top})`)
+				.style("color","white")
 				.call(leftAxis);
 
 			//y-axis gridlines
