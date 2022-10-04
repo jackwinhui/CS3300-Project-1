@@ -17,13 +17,21 @@
 			font-family: "Copperplate", fantasy;
 		}
 
+		.subtitle {
+			font-style: bold;
+			font-size: 25px;
+			font-family: "Copperplate", fantasy;
+		}
+
+
 		.small {
-			font: italic bold 25px serif;
+			font-size: 25px;
+			font-family: "Copperplate", fantasy;
 		}
 
 		svg {
 			background-size: 1200px 800px;
-			background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./marvel.png');
+			background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./marvel.png');
 		}
 	</style>
 </head>
@@ -33,7 +41,7 @@
 	const svg = d3.select("svg");
 	const width = svg.attr("width");
 	const height = svg.attr("height");
-	const margin = { top: 100, right: 100, bottom: 100, left: 150 };
+	const margin = { top: 150, right: 100, bottom: 100, left: 150 };
 	const chartWidth = width - margin.left - margin.right;
 	const chartHeight = height - margin.top - margin.bottom;
 	let annotations = svg.append("g").attr("id", "annotations");
@@ -89,8 +97,17 @@
 				.attr("class", "title")
 				.attr("text-anchor", "middle")
 				.attr("x", margin.left + chartWidth / 2)
-				.attr("y", margin.top - 20)
-				.text("MARVEL CINEMATIC UNIVERSE -- PROFIT PER YEAR")
+				.attr("y", margin.top - 60)
+				.text("MARVEL CINEMATIC UNIVERSE")
+				.attr("fill", "white");
+
+			//subtitle
+			annotations.append("text")
+				.attr("class", "subtitle")
+				.attr("text-anchor", "middle")
+				.attr("x", margin.left + chartWidth / 2)
+				.attr("y", margin.top - 30)
+				.text("PROFIT PER MOVIE OVER THE YEARS")
 				.attr("fill", "white");
 
 			//x-axis label
@@ -109,12 +126,22 @@
 				.attr("class", "small")
 				.attr("transform", "rotate(270)")
 				.attr("text-anchor", "middle")
-				.attr("x", -height / 2)
-				.attr("y", margin.left / 2)
-				.text("(Worldwide Box Office-Production Budget) (Millions)")
+				.attr("x", -height / 2 - 30)
+				.attr("y", margin.left / 2 - 10)
+				.text("Worldwide Box Office-Production Budget")
 				.attr("fill", "white")
 				.attr("font-size", "32");
 
+			//y-axis label
+			annotations.append("text")
+				.attr("class", "small")
+				.attr("transform", "rotate(270)")
+				.attr("text-anchor", "middle")
+				.attr("x", -height / 2 - 30)
+				.attr("y", margin.left / 2 + 10)
+				.text("(Millions)")
+				.attr("fill", "white")
+				.attr("font-size", "32");
 
 
 			// annotations.append("text")
