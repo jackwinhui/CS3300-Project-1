@@ -11,8 +11,14 @@
 			stroke: none;
 		}
 
+		.title {
+			font-style: bold;
+			font-size: 40px;
+			font-family: "Copperplate", fantasy;
+		}
+
 		.small {
-			font: bold 30px garamond;
+			font: italic bold 25px serif;
 		}
 
 		svg {
@@ -27,7 +33,7 @@
 	const svg = d3.select("svg");
 	const width = svg.attr("width");
 	const height = svg.attr("height");
-	const margin = { top: 100, right: 100, bottom: 100, left: 100 };
+	const margin = { top: 100, right: 100, bottom: 100, left: 150 };
 	const chartWidth = width - margin.left - margin.right;
 	const chartHeight = height - margin.top - margin.bottom;
 	let annotations = svg.append("g").attr("id", "annotations");
@@ -78,18 +84,38 @@
 				.attr("transform", `translate(${margin.left}, ${chartHeight + margin.top + 10})`)
 				.call(bottomGridlines);
 
+			//title
 			annotations.append("text")
-				.attr("class", "small")
+				.attr("class", "title")
 				.attr("text-anchor", "middle")
 				.attr("x", margin.left + chartWidth / 2)
 				.attr("y", margin.top - 20)
-				.text("MARVEL PROFIT PER YEAR");
+				.text("MARVEL CINEMATIC UNIVERSE -- PROFIT PER YEAR")
+				.attr("fill", "white");
+
+			//x-axis label
 			annotations.append("text")
 				.attr("class", "small")
 				.attr("text-anchor", "middle")
 				.attr("x", margin.left + chartWidth / 2)
 				.attr("y", margin.top + chartHeight + 70)
-				.text("Date, (Year)");
+				.text("Date (Year)")
+				.attr("fill", "white")
+				.attr("font-size", "100")
+				.attr("font", "100px serif");
+
+			//y-axis label
+			annotations.append("text")
+				.attr("class", "small")
+				.attr("transform", "rotate(270)")
+				.attr("text-anchor", "middle")
+				.attr("x", -height / 2)
+				.attr("y", margin.left / 2)
+				.text("(Worldwide Box Office-Production Budget) (Millions)")
+				.attr("fill", "white")
+				.attr("font-size", "32");
+
+
 
 			// annotations.append("text")
 			//    .attr("class", "small")
