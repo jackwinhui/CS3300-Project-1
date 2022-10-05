@@ -80,15 +80,15 @@
 
 			//y-axis gridlines
 			let leftGridlines = d3.axisLeft(boxOfficeScale).tickSize(-chartWidth - 10).tickFormat("");
-			svg.append('g')
-				.attr("class", "y gridlines")
+			annotations.append('g')
+				.attr("class", "gridlines")
 				.attr("transform", `translate(${margin.left - 10}, ${margin.top})`)
 				.call(leftGridlines);
 
 			//x-axis gridlines
 			let bottomGridlines = d3.axisBottom(dateScale).tickSize(-chartHeight - 10).tickFormat("");
-			svg.append('g')
-				.attr("class", "x gridlines")
+			annotations.append('g')
+				.attr("class", "gridlines")
 				.attr("transform", `translate(${margin.left}, ${chartHeight + margin.top + 10})`)
 				.call(bottomGridlines);
 
