@@ -4,7 +4,7 @@
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<style>
 		.gridlines line {
-			stroke : grey;
+			stroke: grey;
 		}
 
 		.gridlines .domain {
@@ -33,6 +33,7 @@
 			background-size: 1200px 800px;
 			background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./marvel.png');
 		}
+
 		label {
 			font-color: white;
 		}
@@ -145,75 +146,81 @@
 				.text("(Millions)")
 				.attr("fill", "grey")
 				.attr("font-size", "32");
+
+			//data line
 			var lineGen = d3.line()
-								.x(d => dateScale(d.release_date))
-								.y(d => boxOfficeScale((d['worldwide_box_office'] - d['production_budget']) / 1000000));
+				.x(d => dateScale(d.release_date))
+				.y(d => boxOfficeScale((d['worldwide_box_office'] - d['production_budget']) / 1000000));
 			chartArea.append("path")
-					 .datum(data)
-					 .attr("class","line")
-					 .attr("fill","none")
-					 .attr("stroke","white")
-					 .attr("stroke-width",6)
-					 .attr("d",lineGen);
+				.datum(data)
+				.attr("class", "line")
+				.attr("fill", "none")
+				.attr("stroke", "white")
+				.attr("stroke-width", 6)
+				.attr("d", lineGen);
+
+			//data points
 			d3.select("svg")
-		        .selectAll("circle")
-		        .data(data)
-		        .join("circle")
-		        .attr("cx", d => dateScale(d["release_date"]))
-		        .attr("cy", d => boxOfficeScale((d["worldwide_box_office"]-d["production_budget"])/ 1000000))
-		        .attr("r", 8)
-		        .attr("transform", `translate(${margin.left},${margin.top})`)
-		        .attr("fill", "white");
-		    let mouseGroup = chartArea.append("g");
-		    let xMarker = mouseGroup.append("line")
-		    						.attr("id","xMarker")
-		    						.attr("fill","none")
-		    						.attr("stroke","white")
-		    						.attr("stroke-width",1)
-		    						.attr("y1",0)
-		    						.attr("y2",chartHeight+20)
-		    						.attr("visibility","hidden");
-		    let valueMarker = mouseGroup.append("circle")
-		    							.attr("id","valueMarker")
-		    							.attr("stroke","white")
-		    							.attr("stroke-width",2)
-		    							.attr("r",10)
-		    							.attr("visibility","hidden");
-		    let label = mouseGroup.append("text")
-		    					  .attr("id","label")
-		    					  .attr("visibility","")
-		    					  .attr("class","label");
-		    let activeRegion = mouseGroup.append("rect")
-		    						     .attr("id","activeRegion")
-		    						     .attr("width",chartWidth+100)
-		    						     .attr("height",chartHeight+100)
-		    						     .attr("fill","none")
-		    						     .attr("pointer-events","all");
-		    activeRegion.on("mouseover",function(){
-		    	xMarker.attr("visibility","");
-		    	valueMarker.attr("visibility","");
-		    	label.attr("visibility","");
-		    });
-		    activeRegion.on("mouseout",function(){
-		    	xMarker.attr("visibility","hidden");
-		    	valueMarker.attr("visibility","hidden");
-		    	label.attr("visibility","hidden");
-		    });
-		    let findDate = d3.bisector(d => d.release_date).right;
-		    activeRegion.on("mousemove",function(evt){
-		    	let location = d3.pointer(evt);
-		    	let x = location[0];
-		    	let xDate = dateScale.invert(x);
-		    	let index = findDate(data,xDate);
-		    	let d = data[index];
-		    	let xPos = dateScale(d['release_date']);
-		    	let yPos = boxOfficeScale((d['worldwide_box_office'] - d['production_budget']) / 1000000);
-		    	xMarker.attr("x1",xPos).attr("x2",xPos);
-		    	valueMarker.attr("cx",xPos).attr("cy",yPos);
-		    	let txt = d['movie_title']
-		    	label.text(txt)
-		    	label.attr("x",xPos).attr("y",yPos - 30).attr("text-anchor","end").attr("hidden","");
-		    });
+				.selectAll("circle")
+				.data(data)
+				.join("circle")
+				.attr("cx", d => dateScale(d["release_date"]))
+				.attr("cy", d => boxOfficeScale((d["worldwide_box_office"] - d["production_budget"]) / 1000000))
+				.attr("r", 8)
+				.attr("transform", `translate(${margin.left},${margin.top})`)
+				.attr("fill", "white");
+
+			//interactive hover
+			let mouseGroup = chartArea.append("g");
+			let xMarker = mouseGroup.append("line")
+				.attr("id", "xMarker")
+				.attr("fill", "none")
+				.attr("stroke", "white")
+				.attr("stroke-width", 1)
+				.attr("y1", 0)
+				.attr("y2", chartHeight + 20)
+				.attr("visibility", "hidden");
+			let valueMarker = mouseGroup.append("circle")
+				.attr("id", "valueMarker")
+				.attr("stroke", "white")
+				.attr("stroke-width", 2)
+				.attr("r", 10)
+				.attr("visibility", "hidden");
+			let label = mouseGroup.append("text")
+				.attr("id", "label")
+				.attr("visibility", "")
+				.attr("class", "label");
+			let activeRegion = mouseGroup.append("rect")
+				.attr("id", "activeRegion")
+				.attr("width", chartWidth + 100)
+				.attr("height", chartHeight + 100)
+				.attr("fill", "none")
+				.attr("pointer-events", "all");
+			activeRegion.on("mouseover", function () {
+				xMarker.attr("visibility", "");
+				valueMarker.attr("visibility", "");
+				label.attr("visibility", "");
+			});
+			activeRegion.on("mouseout", function () {
+				xMarker.attr("visibility", "hidden");
+				valueMarker.attr("visibility", "hidden");
+				label.attr("visibility", "hidden");
+			});
+			let findDate = d3.bisector(d => d.release_date).right;
+			activeRegion.on("mousemove", function (evt) {
+				let location = d3.pointer(evt);
+				let x = location[0];
+				let xDate = dateScale.invert(x);
+				let index = findDate(data, xDate);
+				let d = data[index];
+				let xPos = dateScale(d['release_date']);
+				let yPos = boxOfficeScale((d['worldwide_box_office'] - d['production_budget']) / 1000000);
+				xMarker.attr("x1", xPos).attr("x2", xPos);
+				valueMarker.attr("cx", xPos).attr("cy", yPos);
+				let txt = d['movie_title']
+				label.text(txt)
+				label.attr("x", xPos).attr("y", yPos - 30).attr("text-anchor", "end").attr("hidden", "").attr("fill", "white");
+			});
 		})
 </script>
 
