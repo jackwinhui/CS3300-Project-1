@@ -152,6 +152,15 @@
 					 .attr("stroke","white")
 					 .attr("stroke-width",6)
 					 .attr("d",lineGen);
+				d3.select("svg")
+	        .selectAll("circle")
+	        .data(data)
+	        .join("circle")
+	        .attr("cx", d => dateScale(d["release_date"]))
+	        .attr("cy", d => boxOfficeScale((d["worldwide_box_office"]-d["production_budget"])/ 1000000))
+	        .attr("r", 8)
+	        .attr("transform", `translate(${margin.left},${margin.top})`)
+	        .attr("fill", "white");
 		})
 </script>
 
