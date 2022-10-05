@@ -4,7 +4,7 @@
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<style>
 		.gridlines line {
-			stroke: #fff;
+			stroke : #bbb;
 		}
 
 		.gridlines .domain {
@@ -142,29 +142,16 @@
 				.text("(Millions)")
 				.attr("fill", "white")
 				.attr("font-size", "32");
-
-
-			// annotations.append("text")
-			//    .attr("class", "small")
-			//    .attr("text-anchor", "middle")
-			//    .attr("y", 40)
-			//    .attr("x", chartHeight/2)
-			//    .attr("transform", "rotate(-90)")
-			//    .text("Profit");
-			// annotations.append("text")
-			//    .attr("class", "extrasmall")
-			//    .attr("text-anchor", "middle")
-			//    .attr("y", chartHeight/2)
-			//    .attr("x", 60)
-			//    .attr("transform", "rotate(-90)")
-			//    .text("(worldwide box office revenue - production budget)");
-
-			// svg.append('svg:image')
-			//	.attr('xlink:href', "./marvel_logo.jpeg")
-			// .attr("width", 115.5)
-			// .attr("height", 100)
-			// .attr("x", 0)
-			// .attr("y", 0);
+			var lineGen = d3.line()
+								.x(d => dateScale(d.release_date))
+								.y(d => boxOfficeScale((d['worldwide_box_office'] - d['production_budget']) / 1000000));
+			chartArea.append("path")
+					 .datum(data)
+					 .attr("class","line")
+					 .attr("fill","none")
+					 .attr("stroke","white")
+					 .attr("stroke-width",6)
+					 .attr("d",lineGen);
 		})
 </script>
 
