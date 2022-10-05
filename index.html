@@ -4,7 +4,7 @@
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<style>
 		.gridlines line {
-			stroke : #bbb;
+			stroke : grey;
 		}
 
 		.gridlines .domain {
@@ -117,7 +117,7 @@
 				.attr("x", margin.left + chartWidth / 2)
 				.attr("y", margin.top + chartHeight + 70)
 				.text("Date (Year)")
-				.attr("fill", "white")
+				.attr("fill", "grey")
 				.attr("font-size", "100")
 				.attr("font", "100px serif");
 
@@ -128,8 +128,8 @@
 				.attr("text-anchor", "middle")
 				.attr("x", -height / 2 - 30)
 				.attr("y", margin.left / 2 - 10)
-				.text("Worldwide Box Office-Production Budget")
-				.attr("fill", "white")
+				.text("Worldwide Box Office-Profit")
+				.attr("fill", "grey")
 				.attr("font-size", "32");
 
 			//y-axis label
@@ -140,7 +140,7 @@
 				.attr("x", -height / 2 - 30)
 				.attr("y", margin.left / 2 + 10)
 				.text("(Millions)")
-				.attr("fill", "white")
+				.attr("fill", "grey")
 				.attr("font-size", "32");
 			var lineGen = d3.line()
 								.x(d => dateScale(d.release_date))
