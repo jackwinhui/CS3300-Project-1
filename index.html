@@ -184,7 +184,7 @@
 
 			//y-axis with boxOffice - productionBudget
 			const boxOfficeExtent = d3.extent(data, d => (d['worldwide_box_office'] / d['production_budget']));
-			const boxOfficeScale = d3.scaleLinear().domain(boxOfficeExtent).range([chartHeight, 0]);
+			const boxOfficeScale = d3.scaleLog().domain(boxOfficeExtent).range([chartHeight, 0]);
 			let leftAxis = d3.axisLeft(boxOfficeScale);
 			annotations.append("g")
 				.attr("class", "y axis")
