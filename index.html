@@ -453,7 +453,6 @@
 		</pattern>
 	</defs>
 </svg>
-<<<<<<< HEAD
 <p id = "graph2">
 <script>
 	const svg2 = d3.select("svg#graph2");
@@ -641,7 +640,6 @@
 					});
 		})
 </script>
-=======
 <p id="graph2">
 	<script>
 		const svg2 = d3.select("svg#graph2");
@@ -829,7 +827,6 @@
 				// });
 			})
 	</script>
->>>>>>> e971add9dff1680266f4a9614146253d33c3af46
 </p>
 
 <svg id="graph3" height=800 width=1200 style="border:1px solid black">
@@ -986,7 +983,7 @@
 			let leftAxis3 = d3.axisLeft(scoreScale);
 			annotations3.append("g")
 				.attr("class", "y axis")
-				.attr("transform", `translate(${margin3.left - 10},${margin3.top-50})`)
+				.attr("transform", `translate(${margin3.left - 10},${margin3.top-40})`)
 				.style("color", "white")
 				.call(leftAxis3);
 
@@ -994,7 +991,7 @@
 			let leftGridlines3 = d3.axisLeft(scoreScale).tickSize(-chartWidth3 - 10).tickFormat("");
 			annotations3.append('g')
 				.attr("class", "gridlines")
-				.attr("transform", `translate(${margin3.left - 10}, ${margin3.top-50})`)
+				.attr("transform", `translate(${margin3.left - 10}, ${margin3.top-40})`)
 				.call(leftGridlines3);
 
 			//title
@@ -1052,14 +1049,14 @@
 		 		.attr("class","stick")
 		 		.attr("x1",45)
 		 		.attr("x2",45)
-		 		.attr("y1",scoreScale(avgScore)-50)
-		 		.attr("y2",d=>scoreScale(d3.mean([d["tomato_meter"],d["audience_score"]]))-50)
+		 		.attr("y1",scoreScale(avgScore)-40)
+		 		.attr("y2",d=>scoreScale(d3.mean([d["tomato_meter"],d["audience_score"]]))-40)
 
 		 svg3.selectAll("circle")
 			   .data(data)
 			   .join("circle")
 			   .attr("cx", d => movieScale(d["movie_title"])+20)
-			   .attr("cy", d => scoreScale(d3.mean([d["tomato_meter"],d["audience_score"]]))-50)
+			   .attr("cy", d => scoreScale(d3.mean([d["tomato_meter"],d["audience_score"]]))-40)
 			   .attr("r", 15)
 			   .attr("fill", "white")
 			   .attr("transform", `translate(${margin3.left},${margin3.top})`);
