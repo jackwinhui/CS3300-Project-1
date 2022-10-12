@@ -738,7 +738,7 @@
 			const scoreExtent = d3.extent(data, d=>(d.tomato_meter+d.audience_score)/2);
 			const avgScore = d3.mean(data,d=>(d.tomato_meter+d.audience_score)/2);
 			const dist = Math.max(Math.abs(scoreExtent[0]-avgScore),Math.abs(scoreExtent[1]-avgScore));
-			const adjustedExtent = [avgScore-dist,avgScore+dist]
+			const adjustedExtent = [avgScore-dist,100]
 			console.log(adjustedExtent)
 			const scoreScale = d3.scaleLinear().domain(adjustedExtent).range([chartHeight,0]);
 			let leftAxis3 = d3.axisLeft(scoreScale);
